@@ -164,3 +164,5 @@ const driverSchema = mongoose.Schema({
     type: String,
   },
 });
+
+module.exports = mongoose.model("Champ", driverSchema);

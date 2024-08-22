@@ -4,6 +4,9 @@ const router = express.Router();
 // add a driver entry
 // @POST /api/user
 // @private route
+router.post("/api/drivers", async (req, res) => {
+  res.status(201).json({ message: "New driver details added!" });
+});
 
 // fetch all drivers
 // @GET /api/user
@@ -20,3 +23,5 @@ const router = express.Router();
 // delete a specific driver by id
 // @DELETE /api/user/:id
 // @private route
+
+module.exports = router;
