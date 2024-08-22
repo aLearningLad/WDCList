@@ -48,4 +48,119 @@ const driverSchema = mongoose.Schema({
     type: Number,
     required: [true, "Highest win tally for season required"],
   },
+  karting_world_champion: {
+    type: Boolean,
+    required: [
+      true,
+      "You need to specify whether the driver was a karting champion in their youth",
+    ],
+  },
+  F4_champion: {
+    type: Boolean,
+    required: [
+      true,
+      "You need to specify whether the driver was a Formula 4 champion",
+    ],
+  },
+  F3_champion: {
+    type: Boolean,
+    required: [
+      true,
+      "You need to specify whether the driver was a Formula 3 champion",
+    ],
+  },
+  F2_champion: {
+    type: Boolean,
+    required: [
+      true,
+      "You need to specify whether the driver was a Formula 2 champion",
+    ],
+  },
+  current_status: {
+    type: String,
+    required: [
+      true,
+      "Please specify the driver's current status, whether racing or retired",
+    ],
+  },
+  notable_ability: {
+    type: String,
+  },
+  wet_weather_rating: {
+    type: Number,
+    required: [true, "Provide a wet weather driving skill rating out of 10"],
+  },
+  car_balace: {
+    type: String,
+    required: [true, "Either Oversteer, Understeer or Neutral"],
+  },
+  years_active_in_f1: {
+    type: String,
+    required: [true, "Year of debut - year of retirement / present year "],
+  },
+  teams_driven_for: {
+    type: String,
+    required: [true, "Which teams did they drive for?"],
+  },
+  wdc_title_years: {
+    type: String,
+    required: [true, "Provide years during which WDC was won"],
+  },
+  notable_rivals: {
+    type: String,
+    required: [true, "Who were their fiercest rivals?"],
+  },
+  signature_win: {
+    type: String,
+    required: [true, "Which win is synonymous with their name?"],
+  },
+  signature_qualy: {
+    type: String,
+    required: [true, "Which qualy lap or session was their best?"],
+  },
+  driving_style: {
+    type: String,
+    required: [true, "Describe their driving style in detail"],
+  },
+  injuries: {
+    type: String,
+  },
+  post_f1_career: {
+    type: String,
+  },
+  mentors_or_influences: {
+    type: String,
+  },
+  allies: {
+    type: String,
+  },
+  controversies: {
+    type: String,
+    required: [true, "What shady stuff have they been involved in?"],
+  },
+  avg_qualy: {
+    type: Number,
+    required: true,
+  },
+  race_craft_rating: {
+    type: Number,
+    required: [true, "Give a rating out of 10"],
+  },
+  historic_milestones_in_f1: {
+    type: String,
+    required: [true, "Mention milestones they achieved"],
+  },
+  personality_and_media: {
+    type: String,
+    required: [true, "What were their media relations like?"],
+  },
+  hobbies: {
+    type: String,
+  },
+  pre_race_rituals: {
+    type: String,
+  },
+  philanthropy: {
+    type: String,
+  },
 });
