@@ -1,0 +1,11 @@
+{
+  "name": "wdclist",
+  "version": "1.0.0",
+  "description": "An Express API to share data on the most illustrious, talented and controversial Formula One World Driver's Championship winners since 1997",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thato",
+  "license": "MIT"
+}
