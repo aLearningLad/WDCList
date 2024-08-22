@@ -4,8 +4,15 @@
   "description": "An Express API to share data on the most illustrious, talented and controversial Formula One World Driver's Championship winners since 1997",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Thato",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "nodemon": "^3.1.4"
+  }
 }

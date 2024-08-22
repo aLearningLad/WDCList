@@ -1,0 +1,9 @@
+
+# node modules
+node_modules
+
+# environment variables
+.env
+
+# key codes to allow API user who requested permission to add to database or edit anything
+keyCodes.js
