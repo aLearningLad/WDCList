@@ -7,7 +7,7 @@ const driverSchema = mongoose.Schema({
   },
   nickname: {
     type: String,
-    required: false,
+    required: [true, "Add a nickname or add 'Not known'"],
   },
   birthday: {
     type: String,
@@ -27,6 +27,7 @@ const driverSchema = mongoose.Schema({
   },
   pole_positions: {
     type: Number,
+    required: [true, "Add number of poles achieved"],
   },
   fastest_laps: {
     type: Number,
@@ -85,12 +86,13 @@ const driverSchema = mongoose.Schema({
   },
   notable_ability: {
     type: String,
+    required: [true],
   },
   wet_weather_rating: {
     type: Number,
     required: [true, "Provide a wet weather driving skill rating out of 10"],
   },
-  car_balace: {
+  car_balance: {
     type: String,
     required: [true, "Either Oversteer, Understeer or Neutral"],
   },
@@ -124,15 +126,19 @@ const driverSchema = mongoose.Schema({
   },
   injuries: {
     type: String,
+    required: [true],
   },
   post_f1_career: {
     type: String,
+    required: [true],
   },
   mentors_or_influences: {
     type: String,
+    required: [true],
   },
   allies: {
     type: String,
+    required: [true],
   },
   controversies: {
     type: String,
@@ -156,12 +162,15 @@ const driverSchema = mongoose.Schema({
   },
   hobbies: {
     type: String,
+    required: [true],
   },
   pre_race_rituals: {
     type: String,
+    required: [true],
   },
   philanthropy: {
     type: String,
+    required: [true],
   },
 });
 
