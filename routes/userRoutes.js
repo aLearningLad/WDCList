@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const connectToDb = require("../lib/utils/connectToDb");
 
 // add a driver entry
 // @POST /api/user
