@@ -7,3 +7,6 @@ node_modules
 
 # key codes to allow API user who requested permission to add to database or edit anything
 keyCodes.js
+
+# notes on what I still need to do
+todo.txt

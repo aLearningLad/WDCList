@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const connectToDb = require("../lib/utils/connectToDb");
 const Champ = require("../models/driverModel");
+const mongoose = require("mongoose");
 
 // add a driver entry
 // @POST /api/user
@@ -100,14 +101,42 @@ router.post("/api/drivers", async (req, res) => {
 // fetch all drivers
 // @GET /api/user
 // @public route
+router.get("/api/drivers", async (req, res) => {
+  const driversList = await Champ.find();
+
+  if (!driversList) {
+    res.status(404);
+    throw new Error("WDC driver's list seems to be empty right now.");
+  }
+
+  res.json(driversList);
+  res.status(200);
+});
 
 // fetch a specific driver by id
 // @GET /api/user/:id
 // @public route
+router.get("/api/drivers/:id", async (req, res) => {
+  const { id: driverId } = req.params;
+
+  // check that ID wanted is valid acc. to mongoose's requirements, i.e. a 24 hex character
+  if (!mongoose.Types.ObjectId.isValid(driverId)) {
+    return res.status(400).json({ error: "Invalid driver ID format" });
+  }
+  const wantedDriver = await Champ.findById(driverId);
+
+  if (!wantedDriver) {
+    res.status(404);
+    throw new Error("That driver is not listed on the database");
+  }
+
+  res.status(200).json(wantedDriver);
+});
 
 // update a specific driver by id
 // @PUT /api/user/:id
 // @private route
+router;
 
 // delete a specific driver by id
 // @DELETE /api/user/:id
