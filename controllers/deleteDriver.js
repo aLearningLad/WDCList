@@ -1,4 +1,7 @@
-const deleteDriver = async (req, res) => {
+const Champ = require("../models/driverModel");
+const asyncHandler = require("express-async-handler");
+
+const deleteDriver = asyncHandler(async (req, res) => {
   const { id: IdToDelete } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(IdToDelete)) {
@@ -13,6 +16,6 @@ const deleteDriver = async (req, res) => {
   res
     .status(200)
     .json({ message: "The following driver was deleted: ", deletedDriver });
-};
+});
 
-module.export = deleteDriver;
+module.exports = deleteDriver;

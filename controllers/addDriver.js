@@ -1,4 +1,7 @@
-const addDriver = async (req, res) => {
+const Champ = require("../models/driverModel");
+const asyncHandler = require("express-async-handler");
+
+const addDriver = asyncHandler(async (req, res) => {
   const {
     full_name,
     nickname,
@@ -87,6 +90,6 @@ const addDriver = async (req, res) => {
       .status(201)
       .json({ message: "New driver details added!", driverDetails: newDriver });
   } else throw new Error("Please double-check that all values are inserted!");
-};
+});
 
-module.export = addDriver;
+module.exports = addDriver;

@@ -1,4 +1,7 @@
-const getAllDrivers = async (req, res) => {
+const Champ = require("../models/driverModel");
+const asyncHandler = require("express-async-handler");
+
+const getAllDrivers = asyncHandler(async (req, res) => {
   const driversList = await Champ.find();
 
   if (!driversList) {
@@ -8,6 +11,6 @@ const getAllDrivers = async (req, res) => {
 
   res.json(driversList);
   res.status(200);
-};
+});
 
-module.export = getAllDrivers;
+module.exports = getAllDrivers;

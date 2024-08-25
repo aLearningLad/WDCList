@@ -1,4 +1,7 @@
-const editDriver = async (req, res) => {
+const Champ = require("../models/driverModel");
+const asyncHandler = require("express-async-handler");
+
+const editDriver = asyncHandler(async (req, res) => {
   const { id: IdToUpdate } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(IdToUpdate)) {
@@ -17,6 +20,6 @@ const editDriver = async (req, res) => {
   }
 
   res.status(200).json({ message: "Driver updated!", updatedDriver });
-};
+});
 
-module.export = editDriver;
+module.exports = editDriver;

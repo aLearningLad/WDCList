@@ -1,4 +1,7 @@
-const getSingleDriver = async (req, res) => {
+const Champ = require("../models/driverModel");
+const asyncHandler = require("express-async-handler");
+
+const getSingleDriver = asyncHandler(async (req, res) => {
   const { id: driverId } = req.params;
 
   // check that ID wanted is valid acc. to mongoose's requirements, i.e. a 24 hex character
@@ -13,6 +16,6 @@ const getSingleDriver = async (req, res) => {
   }
 
   res.status(200).json(wantedDriver);
-};
+});
 
-module.export = getSingleDriver;
+module.exports = getSingleDriver;
