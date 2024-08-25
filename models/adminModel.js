@@ -18,4 +18,4 @@ const adminAcc = new mongoose.Schema(
   { timestamps: true }
 );
 
-exports.module = mongoose.model("adminAcc", adminAcc);
+module.exports = mongoose.model("adminAcc", adminAcc);
