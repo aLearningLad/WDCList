@@ -8,7 +8,7 @@ const adminRoutes = require("./routes/adminRoutes");
 const app = express();
 app.use(express.json());
 app.use("/api/drivers/", userRoutes);
-app.use("api/admin/", adminRoutes);
+app.use("/api/admin/", adminRoutes);
 app.use(errorHandler);
 
 connectToDb();
