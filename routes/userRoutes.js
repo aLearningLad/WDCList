@@ -3,115 +3,18 @@ const router = express.Router();
 const connectToDb = require("../lib/utils/connectToDb");
 const Champ = require("../models/driverModel");
 const mongoose = require("mongoose");
+const addDriver = require("../controllers/addDriver");
+const getAllDrivers = require("../controllers/getAllDrivers");
 
 // add a driver entry
 // @POST /api/user
 // @private route
-router.post("/api/drivers", async (req, res) => {
-  const {
-    full_name,
-    nickname,
-    birthday,
-    nation,
-    number_races_won,
-    podiums,
-    pole_positions,
-    fastest_laps,
-    laps_led,
-    total_distance_in_lead,
-    most_points_in_season,
-    most_wins_in_season,
-    karting_world_champion,
-    F4_champion,
-    F3_champion,
-    F2_champion,
-    current_status,
-    notable_ability,
-    wet_weather_rating,
-    car_balance,
-    years_active_in_f1,
-    teams_driven_for,
-    wdc_title_years,
-    notable_rivals,
-    signature_qualy,
-    driving_style,
-    injuries,
-    post_f1_career,
-    mentors_or_influences,
-    allies,
-    controversies,
-    avg_qualy,
-    race_craft_rating,
-    historic_milestones_in_f1,
-    personality_and_media,
-    hobbies,
-    pre_race_rituals,
-    philanthropy,
-  } = req.body;
-
-  if (
-    // full_name &&
-    // nickname &&
-    // birthday &&
-    // nation &&
-    // number_races_won &&
-    // podiums &&
-    // pole_positions &&
-    // fastest_laps &&
-    // laps_led &&
-    // total_distance_in_lead &&
-    // most_points_in_season &&
-    // most_wins_in_season &&
-    // karting_world_champion &&
-    // F4_champion &&
-    // F3_champion &&
-    // F2_champion &&
-    // current_status &&
-    // notable_ability &&
-    // wet_weather_rating &&
-    // car_balance &&
-    // years_active_in_f1 &&
-    // teams_driven_for &&
-    // wdc_title_years &&
-    // notable_rivals &&
-    // signature_qualy &&
-    // signature_win &&
-    // driving_style &&
-    // injuries &&
-    // post_f1_career &&
-    // mentors_or_influences &&
-    // allies &&
-    // controversies &&
-    // avg_qualy &&
-    // race_craft_rating &&
-    // historic_milestones_in_f1 &&
-    // personality_and_media &&
-    // hobbies &&
-    // pre_race_rituals &&
-    philanthropy
-  ) {
-    // create driver profile here
-    const newDriver = await Champ.create(req.body);
-    res
-      .status(201)
-      .json({ message: "New driver details added!", driverDetails: newDriver });
-  } else throw new Error("Please double-check that all values are inserted!");
-});
+router.post("/api/drivers", addDriver);
 
 // fetch all drivers
 // @GET /api/user
 // @public route
-router.get("/api/drivers", async (req, res) => {
-  const driversList = await Champ.find();
-
-  if (!driversList) {
-    res.status(404);
-    throw new Error("WDC driver's list seems to be empty right now.");
-  }
-
-  res.json(driversList);
-  res.status(200);
-});
+router.get("/api/drivers", getAllDrivers);
 
 // fetch a specific driver by id
 // @GET /api/user/:id
@@ -136,10 +39,45 @@ router.get("/api/drivers/:id", async (req, res) => {
 // update a specific driver by id
 // @PUT /api/user/:id
 // @private route
-router;
+router.put("/api/drivers/:id", async (req, res) => {
+  const { id: IdToUpdate } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(IdToUpdate)) {
+    res.status(404);
+    throw new Error("That driver isn't on the database, sorry!");
+  }
+
+  const updatedDriver = await Champ.findByIdAndUpdate(IdToUpdate, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!updatedDriver) {
+    res.status(400);
+    throw new Error("Something went wrong");
+  }
+
+  res.status(200).json({ message: "Driver updated!", updatedDriver });
+});
 
 // delete a specific driver by id
 // @DELETE /api/user/:id
 // @private route
+router.delete("/api/drivers/:id", async (req, res) => {
+  const { id: IdToDelete } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(IdToDelete)) {
+    res.status(404);
+    throw new Error(
+      "That ID format looks a bit sus, or it isn't even in our driver database"
+    );
+  }
+
+  const deletedDriver = await Champ.findByIdAndDelete(IdToDelete);
+
+  res
+    .status(200)
+    .json({ message: "The following driver was deleted: ", deletedDriver });
+});
 
 module.exports = router;
