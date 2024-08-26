@@ -1,5 +1,6 @@
 const adminAcc = require("../models/adminModel");
 const dotenv = require("dotenv").config();
+const bcrypt = require("bcrypt");
 
 const registerAdmin = async (req, res) => {
   const { username, adminEmail, password, passKey } = req.body;
@@ -23,16 +24,19 @@ const registerAdmin = async (req, res) => {
     );
   }
 
+  //  salting password before sending to DB
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  // creating the admin
   const newAdmin = await adminAcc.create({
-    //   remember to hash password first!
     username,
     adminEmail,
-    password,
+    password: hashedPassword,
   });
 
   if (newAdmin) {
     res
-      .json(201)
+      .status(201)
       .json({ message: "New admin account registered!: ", newAdmin });
   }
 };
