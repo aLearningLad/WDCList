@@ -3,17 +3,19 @@ const adminAcc = require("../models/adminModel");
 const jwt = require("jsonwebtoken");
 
 const loginAdmin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email: adminEmail, password } = req.body;
 
-  if (!email || !password) {
+  if (!adminEmail || !password) {
     res
       .status(400)
       .json({ message: "Please provide both an email and a password" });
     throw new Error("Please provide both an email and a password");
   }
 
-  const userInDb = await adminAcc.findOne({ email });
-  if (userInDb && (await bcrypt.compare(password, userInDb.password))) {
+  const userInDb = await adminAcc.findOne({ adminEmail });
+  const isMatch = await bcrypt.compare(password, userInDb.password);
+  console.log(isMatch);
+  if (userInDb && isMatch) {
     const accessToken = jwt.sign(
       {
         user: {
@@ -25,7 +27,12 @@ const loginAdmin = async (req, res) => {
       { expiresIn: "15m" }
     );
 
-    res.status(200).json({ message: "User found in DB! ", userInDb });
+    res.status(200).json({
+      message: "User found in DB! ",
+      userInDb,
+      showingToken: "Here is the accessToken: ",
+      accessToken,
+    });
   } else {
     res.status(404).json({
       message:

@@ -1,5 +1,6 @@
 const Champ = require("../models/driverModel");
 const asyncHandler = require("express-async-handler");
+const mongoose = require("mongoose");
 
 const editDriver = asyncHandler(async (req, res) => {
   const { id: IdToUpdate } = req.params;
@@ -16,7 +17,6 @@ const editDriver = asyncHandler(async (req, res) => {
 
   if (!updatedDriver) {
     res.status(400);
-    throw new Error("Something went wrong");
   }
 
   res.status(200).json({ message: "Driver updated!", updatedDriver });

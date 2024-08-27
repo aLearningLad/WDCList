@@ -19,9 +19,7 @@ const registerAdmin = async (req, res) => {
 
   if (!username || !adminEmail || !password) {
     res.status(403);
-    throw new Error(
-      "Please ensure all values are filled, including the passKey"
-    );
+    throw new Error("Please ensure all values are filled");
   }
 
   //  salting password before sending to DB
